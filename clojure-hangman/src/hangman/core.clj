@@ -1,4 +1,4 @@
-(ns clojure-hangman.core
+(ns hangman.core
   (:gen-class))
 
 (def life-total 5)

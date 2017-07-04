@@ -1,4 +1,4 @@
-# clojure-hangman
+# hangman
 
 FIXME: description
 
@@ -10,7 +10,7 @@ Download from http://example.com/FIXME.
 
 FIXME: explanation
 
-    $ java -jar clojure-hangman-0.1.0-standalone.jar [args]
+    $ java -jar hangman-0.1.0-standalone.jar [args]
 
 ## Options
 
