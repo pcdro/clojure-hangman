@@ -1,7 +1,7 @@
 (ns hangman.core
   (:gen-class))
 
-(use '[clojure.string :as clj :only (join)])
+(require '[clojure.string :as clj :only (join)])
 
 (def life-total 6)
 
@@ -9,13 +9,13 @@
 
 (defn you-win [] (println "You win :)"))
 
-(defn discovered-word? 
-  [secret-word attempts] 
-  (empty? (remaining-letters secret-word attempts)))
-
 (defn remaining-letters 
   [secret-word attempts]
   (remove (fn [letter] (contains? attempts (str letter))) secret-word))
+
+(defn discovered-word? 
+  [secret-word attempts] 
+  (empty? (remaining-letters secret-word attempts)))
 
 (defn print-current-attempts 
   [secret-word attempts] 
@@ -41,9 +41,10 @@
     (if (discovered-word? secret-word attempts)
       (you-win)
       (do
-        (print-current-hits secret-word attempts)
+        (print-current-attempts secret-word attempts)
+        ;; create function apart to see if need dec life or not
         (print-remaining-life (dec life-count))
-        (run-game (dec life-count) secret-word (new-attempt attempts))))))
+        (recur (dec life-count) secret-word (new-attempt attempts))))))
 
 (defn -main
   [& args]
