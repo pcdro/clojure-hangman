@@ -1,7 +1,7 @@
 (ns hangman.core
   (:gen-class))
 
-(use '[clojure.string :only (join)])
+(use '[clojure.string :as clj :only (join)])
 
 (def life-total 6)
 
@@ -9,28 +9,42 @@
 
 (defn you-win [] (println "You win :)"))
 
-(defn print-remaining-life 
-  [current-life] 
-  (println (clojure.string/join ["Remaining Life: " current-life])))
+(defn discovered-word? 
+  [secret-word attempts] 
+  (empty? (remaining-letters secret-word attempts)))
 
 (defn remaining-letters 
-  [secret-word hits]
-  (remove (fn [letter] (contains? hits (str letter))) secret-word))
+  [secret-word attempts]
+  (remove (fn [letter] (contains? attempts (str letter))) secret-word))
 
-(defn discovered-word? 
-  [secret-word hits] 
-  (empty? (remaining-letters secret-word hits)))
+(defn print-current-attempts 
+  [secret-word attempts] 
+  (println (map
+    (fn [letter]
+    (if (contains? attempts (str letter))
+      (clj/join [letter " "])
+      "_ "))
+    secret-word)))
 
-(defn run-game [life-count secret-word hits] 
+(defn print-remaining-life 
+  [current-life] 
+  (println (clj/join ["Remaining Life: " current-life])))
+
+(defn new-attempt [attempts] 
+  (do
+  (println "Insert a letter:")
+  (conj attempts (read-line))))
+
+(defn run-game [life-count secret-word attempts] 
   (if (= life-count 0)
     (you-lose)
-    (if (discovered-word? secret-word hits)
+    (if (discovered-word? secret-word attempts)
       (you-win)
       (do
-        (println "Guess a letter!")
+        (print-current-hits secret-word attempts)
         (print-remaining-life (dec life-count))
-        (run-game (dec life-count) secret-word hits)))))
+        (run-game (dec life-count) secret-word (new-attempt attempts))))))
 
 (defn -main
   [& args]
-  (run-game life-total "TEST" #{"A", "B"}))
+  (run-game life-total "TEST" #{}))
