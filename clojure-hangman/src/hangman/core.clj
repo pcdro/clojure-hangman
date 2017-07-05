@@ -42,9 +42,10 @@
       (you-win)
       (do
         (print-current-attempts secret-word attempts)
-        ;; create function apart to see if need dec life or not
         (print-remaining-life (dec life-count))
-        (recur (dec life-count) secret-word (new-attempt attempts))))))
+        (if (.contains secret-word (clj/join attempts))
+          (recur life-count secret-word (new-attempt attempts))
+          (recur (dec life-count) secret-word (new-attempt attempts)))))))
 
 (defn -main
   [& args]
