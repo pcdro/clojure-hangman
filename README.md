@@ -1,1 +1,1 @@
-# clojure-hangman
+# Clojure Hangman
