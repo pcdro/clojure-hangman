@@ -12,14 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: clj-kondo checks
-      uses: DeLaGuardo/clojure-lint-action@v1
-      #with:
-        # Arguments to be passed to clj-kondo
-        #clj-kondo-args: # default is --lint src
-        # Github token to report linter results back to check
-        #github_token: 
+    - uses: actions/checkout@v2 
     - name: Install dependencies
       run: lein deps
     - name: Run tests
