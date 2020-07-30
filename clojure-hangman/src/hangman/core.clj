@@ -7,7 +7,7 @@
 
 (defn you-lose [] (println "You lose :("))
 
-(defn you-win [] (println "You win :)"))
+(defn you-win [] (println "You win :D"))
 
 (defn remaining-letters 
   [secret-word attempts]
