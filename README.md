@@ -1,6 +1,6 @@
-# hangman
+# Cojure Hangman
 
-FIXME: description
+![Clojure CI](https://github.com/pcdro/clojure-hangman/workflows/Clojure%20CI/badge.svg?branch=master)
 
 ## Installation
 
