@@ -1,5 +1,5 @@
 (ns hangman.core
-  (:gen-class))
+  (:gen-class)) 
 
 (require '[clojure.string :as clj :only (join)])
 
